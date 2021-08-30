@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import Metronome from './components/Metronome';
+
+const AppDiv = styled.div`
+.container{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  width: 100%;
+  height: 100%
+}
+
+.pink{
+  background-color: pink;
+}
+.yellowgreen{
+  background-color: yellowgreen;
+}
+.green{
+  background-color: green;
+}
+.tomato{
+  background-color: tomato;
+}
+display: flex;
+height: 100vh;
+text-align: center;
+padding-top: 3%;
+align-items: center;
+justify-content: center;
+`
 
 function App() {
+  const color = useSelector(state => state.color[0])
+  console.log(color)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppDiv className="App">
+      <div className={`container ${color}`}>
+        <Metronome />
+      </div>
+    </AppDiv>
   );
 }
 
