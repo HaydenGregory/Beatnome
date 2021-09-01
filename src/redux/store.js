@@ -1,10 +1,12 @@
 import { combineReducers, createStore } from 'redux'
 import metronome from './reducers/metronome';
 import animation from './reducers/animation';
+import video from './reducers/video';
 
 const rootReducer = combineReducers({
     metronome:metronome,
-    animation: animation
+    animation: animation,
+    video: video,
 })
 
 const store = createStore(
