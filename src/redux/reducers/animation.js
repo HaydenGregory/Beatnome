@@ -1,5 +1,5 @@
 const defaultState = {
-    isOn: true
+    isOn: false
 }
 
 function animation(state = defaultState, action) {

@@ -8,14 +8,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useRef } from 'react';
 import './App.css';
 import Video from './components/Video';
-import store from './redux/store';
 
 
 
 
 function App() {
   const animationToggle = useSelector(state => state.animation.isOn)
-  const videoToggle = useSelector(state => state.video.isOn)
+  const bpm = useSelector(state => state.tempo.tempo);
   const constraintsRef = useRef(null)
   const dragControls = useDragControls()
   function startDrag(e) {
@@ -42,35 +41,38 @@ function App() {
                 <motion.div
                   style={{
                     position: 'absolute',
+                    zIndex: 2,
                     right: 6
                   }}
                   onPointerDown={startDrag}>🖐🏻</motion.div>
                 <Metronome />
               </motion.div>
-              {animationToggle ? <Animation tempo={120} constraintsRef={constraintsRef} /> : ''}
+              {animationToggle ? <Animation tempo={bpm} constraintsRef={constraintsRef} /> : ''}
             </div>
           </Route>
           <Route exact path='/drums'>
+            <Video />
             <div
               ref={constraintsRef}
               className={`contain ${color}`}>
               <motion.div
                 style={{
-                  position: 'relative'
+                  position: 'relative',
                 }}
                 drag
+                layout
                 dragControls={dragControls}
                 dragListener={false}
                 dragConstraints={constraintsRef}>
                 <motion.div
                   style={{
                     position: 'absolute',
+                    zIndex: 2,
                     right: 6
                   }}
                   onPointerDown={startDrag}>🖐🏻</motion.div>
                 <Drums />
               </motion.div>
-              <Video />
             </div>
           </Route>
         </Switch>
@@ -78,34 +80,13 @@ function App() {
     </Router>
   );
 }
-// let currentValue
-// function handleChange() {
-//   let previousValue = currentValue
-//   currentValue = store.getState()
-//   if (previousValue !== currentValue) {
-//     return currentValue
-//   } else {
-//     return {
-//       state: {
-//         video: {
-//           isOn: "none"
-//         }
-//       }
-//     }
-//   }
-// }
-// const state = store.subscribe(handleChange);
-// state ? console.log(state) : console.log("")
-// const videoToggle = state.video.isOn
-const state = store.getState()
-const playing = state.video.isOn
-console.log(playing)
 const AppDiv = styled.div`
   .contain{
     display: flex;
     justify-content:center;
     align-items: center;
-    ${!playing ? 'width: 100vw; height: 100vh' : ""} 
+    width: 100vw; 
+    height: 100vh
   }
 
   .pink{

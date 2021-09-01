@@ -1,10 +1,10 @@
 export function actionToggleOn() {
     return {
-        type: 'TOGGLE_ON'
+        type: 'START'
     }
 }
 export function actionToggleOff() {
     return {
-        type: 'TOGGLE_OFF'
+        type: 'STOP'
     }
 }

@@ -4,12 +4,12 @@ const defaultState = {
 
 function video(state = defaultState, action) {
     switch (action.type) {
-        case 'TOGGLE_ON':
+        case 'START':
             return {
                 ...state,
                 isOn: true
             }
-        case 'TOGGLE_OFF':
+        case 'STOP':
             return{
                 ...state,
                 isOn: false

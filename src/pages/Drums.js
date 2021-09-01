@@ -3,6 +3,8 @@ import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
+import { actionChangeTempo } from '../redux/actions/tempo';
+import { actionChangeSignature } from '../redux/actions/signature';
 import { actionToggleOff, actionToggleOn } from '../redux/actions/video';
 
 
@@ -10,6 +12,8 @@ import { actionToggleOff, actionToggleOn } from '../redux/actions/video';
 const DrumsDiv = styled.div`
     z-index: 1;
     width: 30em;
+    background-color: rgba(255, 255, 255, .7);
+    backdrop-filter: blur(5px);
     display: flex;
     bottom: 30;
     flex-direction: column;
@@ -62,7 +66,7 @@ const DrumsDiv = styled.div`
 
 function Drums() {
     const playing = useSelector(state => state.video.isOn);
-    const [bpm, setbpm] = useState(100);
+    const bpm = useSelector(state => state.tempo.tempo);
     const [beatsPerMeasure, setBeatsPerMeasure] = useState(4);
     const dispatch = useDispatch()
 
@@ -78,7 +82,7 @@ function Drums() {
             <div className="bpm-setter">
                 <div>{bpm} Beats Per Minute </div>
                 <input
-                    onChange={(e) => setbpm(e.target.value)}
+                    onChange={(e) => dispatch(actionChangeTempo(e.target.value))}
                     className='range'
                     type="range"
                     min="50"
@@ -87,16 +91,16 @@ function Drums() {
                 <label name="Tempo">Tempo</label>
                 <input
                     name="Tempo"
-                    onChange={(e) => setbpm(e.target.value)}
+                    onChange={(e) => dispatch(actionChangeTempo(e.target.value))}
                     type="number"
                     min="50"
                     max="230"
                     value={bpm} />
                 <label>Time Signature</label>
-                <select onChange={(e) => setBeatsPerMeasure(e.target.value)}>
-                    <option value={4}>4/4</option>
-                    <option value={6}>6/8</option>
-                    <option value={3}>3/4</option>
+                <select onChange={(e) => dispatch(actionChangeSignature(e.target.value))}>
+                    <option value={"4/4"}>4/4</option>
+                    <option value={"6/8"}>6/8</option>
+                    <option value={"3/4"}>3/4</option>
                 </select>
             </div>
             <div className='buttons_div'>

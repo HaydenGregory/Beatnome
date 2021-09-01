@@ -3,9 +3,12 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionColorChange } from '../redux/actions/metronome';
 import { actionToggleOn, actionToggleOff } from '../redux/actions/animation';
+import { actionToggleOff as actionStop, actionToggleOn as actionStart } from '../redux/actions/video';
+
 import { Button } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { actionChangeTempo } from '../redux/actions/tempo';
 // var tapTempo = require('tap-tempo')
 
 const click2Import = '/Click(2).mp3';
@@ -16,6 +19,7 @@ const click2 = new Audio(click2Import)
 //! CSS
 const MetronomeDiv = styled.div`
     width: 30em;
+    z-index: 1; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,6 +27,8 @@ const MetronomeDiv = styled.div`
     border-radius: 3%;
     box-shadow: 10px 5px 10px black;
     padding: 3%;
+    background-color: rgba(255, 255, 255, .7);
+    backdrop-filter: blur(5px);
 
     input{
         text-align:center;
@@ -63,12 +69,13 @@ const MetronomeDiv = styled.div`
         border-radius: 40px;
         width: 1em;
         height: 1em;
+        position: relative;
     }
 
     .toggle_switches{
         margin-top: 3%;
         display: flex;
-        justify-content: space-evenly
+        justify-content: space-evenly;
     }
 
     .bpm-setter{
@@ -98,12 +105,12 @@ const MetronomeDiv = styled.div`
 
 function Metronome() {
     const dispatch = useDispatch();
-    const [playing, setPlaying] = useState(false);
-    const [bpm, setbpm] = useState(100);
+    const animationToggle = useSelector(state => state.animation.isOn)
+    const bpm = useSelector(state => state.tempo.tempo);
+    const playing = useSelector(state => state.video.isOn)
     const [count, setCount] = useState(0);
     const [beatsPerMeasure, setBeatsPerMeasure] = useState(4);
     const [colorIsOn, setColorIsOn] = useState(true);
-    const animationToggle = useSelector(state => state.animation.isOn)
 
     const bpmConvertTime = 60000 / bpm;
     const spring = {
@@ -141,25 +148,26 @@ function Metronome() {
 
     function handleStartStop() {
         setCount(0)
-        playing ? setPlaying(false) : setPlaying(true);
         if (playing) {
+            dispatch(actionStop())
             dispatch(actionColorChange('none'))
-        }
-        console.log(playing)
+        } else { dispatch(actionStart())}
     }
 
     const toggleColorSwitch = () => setColorIsOn(!colorIsOn);
+
     function toggleAnimatedBoxSwitch() {
         if (animationToggle === true) {
             dispatch(actionToggleOff())
         } else { dispatch(actionToggleOn()) }
     }
+
     return (
         <MetronomeDiv>
             <div className="bpm-setter" onMouseDown={(e) => { e.stopPropagation() }}>
                 <div>{bpm} Beats Per Minute </div>
                 <input
-                    onChange={(e) => setbpm(e.target.value)}
+                    onChange={(e) => dispatch(actionChangeTempo(e.target.value))}
                     className='range'
                     type="range"
                     min="50"
@@ -168,7 +176,7 @@ function Metronome() {
                 <label name="Tempo">Tempo</label>
                 <input
                     name="Tempo"
-                    onChange={(e) => setbpm(e.target.value)}
+                    onChange={(e) => dispatch(actionChangeTempo(e.target.value))}
                     type="number"
                     min="50"
                     max="230"
