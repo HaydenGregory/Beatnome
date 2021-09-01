@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -67,7 +67,6 @@ const DrumsDiv = styled.div`
 function Drums() {
     const playing = useSelector(state => state.video.isOn);
     const bpm = useSelector(state => state.tempo.tempo);
-    const [beatsPerMeasure, setBeatsPerMeasure] = useState(4);
     const dispatch = useDispatch()
 
 

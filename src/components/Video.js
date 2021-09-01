@@ -16,6 +16,7 @@ const VideoDiv = styled.div`
 function Video() {
     const signature = useSelector(state => state.timeSignature.signature)
     const tempo = useSelector(state => state.tempo.tempo)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const video = useCallback((node)=>{
         if(!!node){
             node.playbackRate = tempo / 100
