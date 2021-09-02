@@ -6,7 +6,6 @@ import { actionToggleOn, actionToggleOff } from '../redux/actions/animation';
 import { actionToggleOff as actionStop, actionToggleOn as actionStart } from '../redux/actions/video';
 
 import { Button } from 'react-bootstrap';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { actionChangeTempo } from '../redux/actions/tempo';
 // var tapTempo = require('tap-tempo')
@@ -47,30 +46,64 @@ const MetronomeDiv = styled.div`
     }
 
     .switch {
-        background-color: rgba(255, 255, 255, 0.4);
-        display: flex;
-        justify-content: flex-start;
-        border-radius: 50px;
-        padding: 1%;
-        padding-bottom: 2%;
-        cursor: pointer;
-        width: 3em;
-        height: 1.5em;
-    }
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 23px;
+}   
 
-    .switch[data-isOn="true"] {
-        justify-content: flex-end;
-        width: 3em;
-        height: 1.5em;
-    }
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}   
 
-    .handle {
-        background-color: white;
-        border-radius: 40px;
-        width: 1em;
-        height: 1em;
-        position: relative;
-    }
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 2.8px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    -webkit-transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
 
     .toggle_switches{
         margin-top: 3%;
@@ -119,11 +152,6 @@ function Metronome() {
     const [colorIsOn, setColorIsOn] = useState(true);
 
     const bpmConvertTime = 60000 / bpm;
-    const spring = {
-        type: "spring",
-        stiffness: 700,
-        damping: 30
-    };
 
 
     console.log(bpmConvertTime)
@@ -157,7 +185,7 @@ function Metronome() {
         if (playing) {
             dispatch(actionStop())
             dispatch(actionColorChange('none'))
-        } else { dispatch(actionStart())}
+        } else { dispatch(actionStart()) }
     }
 
     const toggleColorSwitch = () => setColorIsOn(!colorIsOn);
@@ -195,13 +223,15 @@ function Metronome() {
                 </select>
                 <div className="toggle_switches">
                     <span>Color</span>
-                    <div className="switch" data-isOn={colorIsOn} onClick={toggleColorSwitch}>
-                        <motion.div className="handle" layout transition={spring} />
-                    </div>
+                    <label class="switch">
+                        <input type="checkbox" checked={colorIsOn} onClick={toggleColorSwitch} />
+                        <span class="slider round"></span>
+                    </label>
                     <span>Animated Box</span>
-                    <div className="switch" data-isOn={animationToggle} onClick={toggleAnimatedBoxSwitch}>
-                        <motion.div className="handle" layout transition={spring} />
-                    </div>
+                    <label class="switch">
+                        <input type="checkbox"  onClick={toggleAnimatedBoxSwitch} />
+                        <span class="slider round"></span>
+                    </label>
                 </div>
             </div>
             <div className='buttons_div'>
