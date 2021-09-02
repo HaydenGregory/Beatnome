@@ -102,19 +102,29 @@ function App() {
             </div>
           </Route>
         </Switch>
+        <div className="copyright">
+          <span>© 2021 Hayden Gregory All Rights Reserved. || | </span>
+          <span>| Designed by Hayden Gregory</span>
+        </div>
       </AppDiv>
     </Router>
   );
 }
 const AppDiv = styled.div`
-      .contain{
-        display: flex;
+      display: flex;
+      flex-direction: column;
+.contain{
+      display: flex;
+      flex-direction: column;
       justify-content:center;
       align-items: center;
       width: 100vw;
       height: 100vh
   }
-
+  .copyright{
+    display: flex;
+    font-size:10px;
+  }
       .pink{
         background-color: pink;
   }
