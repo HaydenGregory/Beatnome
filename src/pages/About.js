@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { actionUpdateQuote } from '../redux/actions/kanye';
+import { actionColorChange } from '../redux/actions/metronome';
 import { actionChangeSignature } from '../redux/actions/signature';
 import { actionChangeTempo } from '../redux/actions/tempo';
 import { actionToggleOff, actionToggleOn } from '../redux/actions/video';
@@ -75,6 +76,8 @@ function About() {
         fetch('https://api.kanye.rest').then(res => res.json()).then(data => {
             dispatch(actionUpdateQuote(data.quote))
         })
+        dispatch(actionToggleOff())
+        dispatch(actionColorChange(''))
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

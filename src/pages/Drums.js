@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { actionChangeTempo } from '../redux/actions/tempo';
 import { actionChangeSignature } from '../redux/actions/signature';
 import { actionToggleOff, actionToggleOn } from '../redux/actions/video';
+import { actionColorChange } from '../redux/actions/metronome';
 
 
 
@@ -75,6 +76,8 @@ function Drums() {
 
     useEffect(() => {
         dispatch(actionChangeSignature('4/4'))
+        dispatch(actionToggleOff())
+        dispatch(actionColorChange(''))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
