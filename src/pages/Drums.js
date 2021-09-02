@@ -11,6 +11,7 @@ import { actionToggleOff, actionToggleOn } from '../redux/actions/video';
 
 const DrumsDiv = styled.div`
     z-index: 1;
+    max-width:90vw;
     width: 30em;
     background-color: rgba(255, 255, 255, .7);
     backdrop-filter: blur(5px);
@@ -30,7 +31,7 @@ const DrumsDiv = styled.div`
     
     .buttons_div{
         display: flex;
-        justify-content: space-around;
+        justify-content: space-evenly;
     }
 
     .ye_button{
@@ -59,7 +60,6 @@ const DrumsDiv = styled.div`
         display:flex;
         width: fit-content;
         margin-top: 3%;
-        margin-left: 13%;
     }
     .drum_button{
         display:flex;
@@ -115,7 +115,7 @@ function Drums() {
                 </select>
             </div>
             <div className='buttons_div'>
-                <Button action as={Link} to={'/ye'} className="ye_button" variant="outline-warning">ye</Button>
+                <Button action as={Link} to={'/ye'} className="ye_button" variant="outline-warning">Ye</Button>
                 <OverlayTrigger
                     placement="bottom"
                     delay={{ show: 250, hide: 400 }}

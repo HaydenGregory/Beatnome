@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,7 @@ import { actionToggleOff, actionToggleOn } from '../redux/actions/video';
 const AboutDiv = styled.div`
     z-index: 1;
     width: 30em;
+    max-width:90vw;
     background-color: rgba(255, 255, 255, .7);
     backdrop-filter: blur(5px);
     display: flex;
@@ -25,29 +26,38 @@ const AboutDiv = styled.div`
 
     .buttons_div{
         display: flex;
-        justify-content: space-evenly
+        justify-content: space-evenly;
     }
 
     .start_button{
         display:flex;
         align-items: center;
         width: fit-content;
-        margin-top: 3%;
+        margin: 1%;
     }
+
     .drum_button{
         display:flex;
         width: fit-content;
+        align-items:center;
         margin-top: 3%;
+        margin: 1%;
     }
+
     .play_button{
         display:flex;
         width: fit-content;
+        align-items:center;
         margin-top: 3%;
+        margin: 1%;
     }
+
     .ye_button{
         display:flex;
+        align-items:center;
         width: fit-content;
         margin-top: 3%;
+        margin: 1%;
     }
 
     span{
@@ -61,6 +71,13 @@ function About() {
     const playing = useSelector(state => state.video.isOn);
     const signature = useSelector(state => state.timeSignature.signature)
 
+    useEffect(() => {
+        fetch('https://api.kanye.rest').then(res => res.json()).then(data => {
+            dispatch(actionUpdateQuote(data.quote))
+        })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
 
     function handleFetch() {
         fetch('https://api.kanye.rest').then(res => res.json()).then(data => {
@@ -71,7 +88,6 @@ function About() {
     function handleStartStop() {
         if (playing) {
             dispatch(actionToggleOff())
-            // dispatch(actionChangeSignature('4/4'))    
         } else {
             dispatch(actionToggleOn())
             if (signature === '4/4' || signature === 'kanye4' || signature === '6/8' || signature === '3/4') {
@@ -100,7 +116,7 @@ function About() {
             <span>{quote}</span>
             <div className="buttons_div">
                 <Button action as={Link} to={'/'} className="drum_button" variant="outline-warning">Metronome</Button>
-                <Button className='start_button' variant="outline-info" onClick={handleFetch}>{quote ? "Get New Quote" : "Get Quote"}</Button>
+                <Button className='start_button' variant="outline-info" onClick={handleFetch}>{quote ? "New Quote" : "Get Quote"}</Button>
                 <OverlayTrigger
                     placement="bottom"
                     delay={{ show: 250, hide: 400 }}

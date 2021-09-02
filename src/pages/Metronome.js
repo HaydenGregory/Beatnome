@@ -18,6 +18,7 @@ const click2 = new Audio(click2Import)
 //! CSS
 const MetronomeDiv = styled.div`
     width: 30em;
+    max-width:90vw;
     z-index: 1; 
     display: flex;
     flex-direction: column;
@@ -118,6 +119,7 @@ input:checked + .slider:before {
     
     .buttons_div{
         display: flex;
+        justify-content: space-evenly;    
     }
 
     .start_button{
@@ -125,7 +127,6 @@ input:checked + .slider:before {
         align-items: center;
         width: fit-content;
         margin: auto;
-        margin-left: 35%;
         margin-top: 3%;
     }
     .drum_button{
@@ -235,7 +236,7 @@ function Metronome() {
                 </div>
             </div>
             <div className='buttons_div'>
-                <Button action as={Link} to={'/ye'} className="ye_button" variant="outline-warning">ye</Button>
+                <Button action as={Link} to={'/ye'} className="ye_button" variant="outline-warning">Ye</Button>
                 <Button className='start_button' variant="outline-info" onClick={handleStartStop}>{playing ? 'Stop' : 'Start'}</Button>
                 <Button action as={Link} to={'/drums'} className="drum_button" variant="outline-warning">Drums</Button>
             </div>

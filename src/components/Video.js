@@ -25,7 +25,7 @@ function Video() {
     const playing = useSelector(state => state.video.isOn)
     if(playing){return (
         <VideoDiv>
-            <video loop ref={video} autoPlay style={{
+            <video loop ref={video} autoPlay playsInline style={{
                 objectFit: "cover",
                 width: "100vw",
                 height: "100vh",
