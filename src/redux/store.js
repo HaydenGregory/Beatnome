@@ -4,13 +4,15 @@ import animation from './reducers/animation';
 import video from './reducers/video';
 import tempo from './reducers/tempo';
 import timeSignature from './reducers/signature';
+import kanye from './reducers/kanye';
 
 const rootReducer = combineReducers({
     metronome,
     animation,
     video,
     tempo,
-    timeSignature
+    timeSignature,
+    kanye
 })
 
 const store = createStore(

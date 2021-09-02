@@ -92,10 +92,16 @@ const MetronomeDiv = styled.div`
         align-items: center;
         width: fit-content;
         margin: auto;
-        margin-left: 45%;
+        margin-left: 35%;
         margin-top: 3%;
     }
     .drum_button{
+        display:flex;
+        align-items: center;
+        width: fit-content;
+        margin-top: 3%;
+    }
+    .ye_button{
         display:flex;
         align-items: center;
         width: fit-content;
@@ -199,6 +205,7 @@ function Metronome() {
                 </div>
             </div>
             <div className='buttons_div'>
+                <Button action as={Link} to={'/ye'} className="ye_button" variant="outline-warning">ye</Button>
                 <Button className='start_button' variant="outline-info" onClick={handleStartStop}>{playing ? 'Stop' : 'Start'}</Button>
                 <Button action as={Link} to={'/drums'} className="drum_button" variant="outline-warning">Drums</Button>
             </div>

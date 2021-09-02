@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useRef } from 'react';
 import './App.css';
 import Video from './components/Video';
+import About from './pages/About';
 
 
 
@@ -75,32 +76,57 @@ function App() {
               </motion.div>
             </div>
           </Route>
+          <Route exact path='/ye'>
+            <Video />
+            <div
+              ref={constraintsRef}
+              className={`contain ${color}`}>
+              <motion.div
+                style={{
+                  position: 'relative',
+                }}
+                drag
+                layout
+                dragControls={dragControls}
+                dragListener={false}
+                dragConstraints={constraintsRef}>
+                <motion.div
+                  style={{
+                    position: 'absolute',
+                    zIndex: 2,
+                    right: 6
+                  }}
+                  onPointerDown={startDrag}>🖐🏻</motion.div>
+                <About />
+              </motion.div>
+            </div>
+          </Route>
         </Switch>
       </AppDiv>
     </Router>
   );
 }
 const AppDiv = styled.div`
-  .contain{
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    width: 100vw; 
-    height: 100vh
+      .contain{
+        display: flex;
+      justify-content:center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh
   }
 
-  .pink{
-    background-color: pink;
+      .pink{
+        background-color: pink;
   }
-  .yellowgreen{
-    background-color: yellowgreen;
+      .yellowgreen{
+        background-color: yellowgreen;
   }
-  .green{
-    background-color: green;
+      .green{
+        background-color: green;
   }
-  .tomato{
-    background-color: tomato;
+      .tomato{
+        background-color: tomato;
   }
-  `
+      `
 
 export default App;

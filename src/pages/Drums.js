@@ -30,6 +30,13 @@ const DrumsDiv = styled.div`
     
     .buttons_div{
         display: flex;
+        justify-content: space-around;
+    }
+
+    .ye_button{
+        display:flex;
+        width: fit-content;
+        margin-top: 3%;
     }
 
     input{
@@ -50,15 +57,12 @@ const DrumsDiv = styled.div`
 
     .start_button{
         display:flex;
-        align-items: center;
         width: fit-content;
-        margin: auto;
-        margin-left: 42%;
         margin-top: 3%;
+        margin-left: 13%;
     }
     .drum_button{
         display:flex;
-        align-items: center;
         width: fit-content;
         margin-top: 3%;
     }
@@ -103,6 +107,7 @@ function Drums() {
                 </select>
             </div>
             <div className='buttons_div'>
+                <Button action as={Link} to={'/ye'} className="ye_button" variant="outline-warning">ye</Button>
                 <Button className='start_button' variant="outline-info" onClick={handleStartStop}>{playing ? 'Stop' : 'Start'}</Button>
                 <Button action as={Link} to={'/'} className="drum_button" variant="outline-warning">Metronome</Button>
             </div>
