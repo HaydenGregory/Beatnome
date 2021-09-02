@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button } from 'react-bootstrap';
+import React, { useEffect } from 'react'
+import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
@@ -73,12 +73,20 @@ function Drums() {
     const bpm = useSelector(state => state.tempo.tempo);
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        dispatch(actionChangeSignature('4/4'))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     function handleStartStop() {
         playing ? dispatch(actionToggleOff()) : dispatch(actionToggleOn())
     }
 
-
+    const renderTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props}>
+            Start and stop to change time signatures
+        </Tooltip>
+    );
 
     return (
         <DrumsDiv>
@@ -108,7 +116,12 @@ function Drums() {
             </div>
             <div className='buttons_div'>
                 <Button action as={Link} to={'/ye'} className="ye_button" variant="outline-warning">ye</Button>
-                <Button className='start_button' variant="outline-info" onClick={handleStartStop}>{playing ? 'Stop' : 'Start'}</Button>
+                <OverlayTrigger
+                    placement="bottom"
+                    delay={{ show: 250, hide: 400 }}
+                    overlay={renderTooltip}>
+                    <Button className='start_button' variant="outline-info" onClick={handleStartStop}>{playing ? 'Stop' : 'Start'}</Button>
+                </OverlayTrigger>
                 <Button action as={Link} to={'/'} className="drum_button" variant="outline-warning">Metronome</Button>
             </div>
         </DrumsDiv>

@@ -1,10 +1,11 @@
-import React from 'react'
-import { Button } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import React from 'react';
+import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { actionUpdateQuote } from '../redux/actions/kanye';
 import { actionChangeSignature } from '../redux/actions/signature';
+import { actionChangeTempo } from '../redux/actions/tempo';
 import { actionToggleOff, actionToggleOn } from '../redux/actions/video';
 
 
@@ -68,23 +69,30 @@ function About() {
     }
 
     function handleStartStop() {
-        if(playing){
+        if (playing) {
             dispatch(actionToggleOff())
             // dispatch(actionChangeSignature('4/4'))    
         } else {
             dispatch(actionToggleOn())
-            if(signature === '4/4' || signature === 'kanye4' || signature === '6/8' || signature === '3/4'){
+            if (signature === '4/4' || signature === 'kanye4' || signature === '6/8' || signature === '3/4') {
+                dispatch(actionChangeTempo(100))
                 dispatch(actionChangeSignature('kanye'))
             } else if (signature === 'kanye') {
                 dispatch(actionChangeSignature('kanye2'))
             } else if (signature === 'kanye2') {
                 dispatch(actionChangeSignature('kanye3'))
-            }else if (signature === 'kanye3') {
+            } else if (signature === 'kanye3') {
                 dispatch(actionChangeSignature('kanye4'))
             }
         }
     }
 
+
+    const renderTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props}>
+            Start and stop to change songs!
+        </Tooltip>
+    );
 
     return (
         <AboutDiv>
@@ -93,7 +101,12 @@ function About() {
             <div className="buttons_div">
                 <Button action as={Link} to={'/'} className="drum_button" variant="outline-warning">Metronome</Button>
                 <Button className='start_button' variant="outline-info" onClick={handleFetch}>{quote ? "Get New Quote" : "Get Quote"}</Button>
-                <Button className="play_button" variant="outline-dark" onClick={handleStartStop}>{playing ? 'Stop':'Start'}</Button>
+                <OverlayTrigger
+                    placement="bottom"
+                    delay={{ show: 250, hide: 400 }}
+                    overlay={renderTooltip}>
+                    <Button className="play_button" variant="outline-dark" onClick={handleStartStop}>{playing ? 'Stop' : 'Start'}</Button>
+                </OverlayTrigger>
                 <Button action as={Link} to={'/drums'} className="drum_button" variant="outline-warning">Drums</Button>
             </div>
         </AboutDiv>
