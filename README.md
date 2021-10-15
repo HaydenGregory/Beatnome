@@ -16,32 +16,22 @@ Up and running!
 ## Project Screen Shot(s)
 
 #### Home Page:   
+![image](https://user-images.githubusercontent.com/84730187/132139476-6e981d2a-c1a5-4494-aaa3-e937bfcb2bc4.png)
+![image](https://user-images.githubusercontent.com/84730187/132139508-80e69499-57c1-4c64-a5e9-e654577e99f7.png)
 
-![image](https://user-images.githubusercontent.com/84730187/125695272-b5cfa579-c581-4a0e-a377-fc86c2a1e3a1.png)
-#### Results Page:
+#### Drums Page:
+![image](https://user-images.githubusercontent.com/84730187/132139538-03826260-ee0b-488a-9678-ac4a9437b055.png)
 
-![image](https://user-images.githubusercontent.com/84730187/125696593-9a87a804-b7ed-478a-ac35-5906514094bd.png)
+#### Kanye Page:
+![image](https://user-images.githubusercontent.com/84730187/132139560-d4854f92-38b8-465d-a315-45df79a54776.png)
+(Random fun kanye page added to meet the api fetch requirement for the project)
 
 ## Reflection
 
-  - One week group project for Digital Crafts
-  - Set out to build website that delivers useful artist information to the user.
-  - This project was a learning experience for storage things in local storage to use on other pages, pulling large payloads from APIs, and large user interactivity.
-  - Unexpected obstacles:
-    - YouTube URLs delivered from the Audio DB API had a lot of variation and needed to be edited to embed on the the page. Used regular expression to grab the ID's at the end of all the varying links then created new links with the ID's.
-    - Login functionality is easier to do in the back-end, and with this being a front-end project, it took some javascript ingenuity to create a similar functionality within local storage. 
-    - Adding innerHTML from two different URLs onto the same spot on the page was harder than expected. A fetch inside a fetch was needed, along with a promise.all and "...".
-  - What tools did you use to implement this project?
-      - HTML and CSS were built using Bootstrap. This allowed for an easy to implement, clean look. Modifications to the elements were made to achieve a clear user-interface design. Javascript was used to get and present informatyion from various APIs, aklong with adding extra functionality to oother user-experience elements such as buttons.    
+  - One week solo react project for Digital Crafts
+  - Set out to build website that delivers useful visual effects for aiding music teachers in teaching how to play with a metronome.
+  - This project was a learning experience for learning how to use Framer Motion and React. 
 
 #### Background:  
 
-This was a ~one week long porject built to cap off the front-end portion of DigitalCrafts' full-time Web Development course. Project goals included incorporating the use of two different APIs, saving user data, and creasting a functional and visually coherent site using the languages and skills we've learned up to this point.
-
-Originally we wanted to build a site that pulled up information and concert dates of a music artist using the Spotify and BandsinTown APIs. When the use of those became increasingly complicated, we pivoted to different APIs that provided simialr data in a more managable manner, such as Deezer's. We started by building a simple HTML skeleton to provide the space for Javascript to display the musicians' information.
-
-The main challenges were due to APIs either being difficult to work with / retrieve information from and being use-limited, which meant it would break before the project was completed. The solution to these issues, using similar but different APIS, was found realityvley quickly. Another issue was the login functionality. Though this is usually done in the back-end, with this being a front-end project, a faux-verification process was implemented using Javascript and locally storing files.  
-
-One of the main challenges I ran into was Authentication. This lead me to spend a few days on a research spike into OAuth, Auth0, and two-factor authentication using Firebase or other third parties. Due to project time constraints, I had to table authentication and focus more on data visualization from parts of the API that weren't restricted to authenticated users.
-
-In the end, the website was buitl using VanillaJS, Bootstrap, HTML, and CSS. The objective was clear from the beginning, build a site that you can seearch an artist on iand it will presnet relevant information on them such as songs and tour dates. And as more ideas sprung up throughout the time-window, they were implemented. 
+In the end, the website was built using JavaScript, React Bootstrap, Redux, Framer Motion, HTML, and CSS via Styled Divs.
